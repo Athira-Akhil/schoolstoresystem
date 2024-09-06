@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<!--<div>{% if user.is_authenticated %}-->
+<!--    <h4 style="text-align:center;font-color:blue;">Welcome {{user.username}}</h4>-->
+<!--    {% endif %}-->
+<!--</div>-->
+
+<form method="POST" id="StudForm"  data-courses-url="{% url 'SchoolStoreApp:ajax_load_courses' %}" >
+    {% csrf_token %}
+    {% include 'messages.html' %}
+    {{ form.as_p }}
+<!--    {% for fields in form %}-->
+<!--    <label class="form_label" >{{fields.label}}</label>-->
+<!--    {{fields}}-->
+<!--    <br>-->
+<!--    {% endfor %}-->
+    <input type="submit" value="submit" class="btn btn-primary">
+
+{% if user.is_authenticated %}
+    <a href="{% url 'SchoolStoreApp:logout' %}" class="btn btn-primary">Logout</a>
+{% endif %}
+
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_dep_name").change(function () {
+        var url = $("#StudForm").attr("data-courses-url");
+        const dep_nameId = $(this).val();
+        $.ajax({
+            url: url,
+            data: {
+                'dep_name_id': dep_nameId
+            },
+            success: function (data) {
+                console.log(data)
+                $("#id_course").html(data);
+
+            }
+        });
+
+    });
+</script>
+{% endblock %}
+<!--    {% csrf_token %}-->
+<!--    <label> Name: </label>-->
+<!--<input type="text" name="name" size="15"/> <br> <br>-->
+<!--<label> DOB: </label>-->
+<!--<input type="date" name="dob" size="15"/> <br> <br>-->
+<!--<label> Age: </label>-->
+<!--<input type="text" name="age" size="15"/> <br> <br>-->
+<!-- <label>-->
+<!--Gender :-->
+<!--</label>-->
+<!--<input type="radio" name="gender"/> Male-->
+<!--<input type="radio" name="gender"/> Female-->
+<!--<input type="radio" name="gender"/> Other-->
+<!--<br>-->
+<!--<br>-->
+<!--<label>-->
+<!--Phone Number:-->
+<!--</label>-->
+<!--<input type="text" name="phone" size="12"> <br> <br>-->
+<!--<label>Email:</label>-->
+<!--<input type="email" id="email" name="email"> <br>-->
+<!--<br> <br>-->
+<!--<label>Address:</label><br>-->
+<!--<textarea cols="80" rows="5" value="address">-->
+<!--</textarea>-->
+<!--<br> <br>-->
+<!--<label>-->
+<!--Department :-->
+<!--</label>-->
+<!--<select>-->
+<!--<option value="Department">Department</option>-->
+<!--<option value="computer-science">computer Science</option>-->
+<!--<option value="commerce">commerce</option>-->
+<!--<option value="Bio-Science">Bio-Science</option>-->
+<!--<option value="Humanities">Humanities</option>-->
+<!--<option value="Aggriculture">Aggriculture</option>-->
+
+<!--</select>-->
+<!--<br>-->
+<!--<br>-->
+<!--<label>-->
+<!--Course :-->
+<!--</label>-->
+<!--<select>-->
+<!--<option value="Course">Course</option>-->
+<!--<option value="BCA">BCA</option>-->
+<!--<option value="BBA">BBA</option>-->
+<!--<option value="B.Tech">B.Tech</option>-->
+<!--<option value="MBA">MBA</option>-->
+<!--<option value="MCA">MCA</option>-->
+<!--<option value="M.Tech">M.Tech</option>-->
+<!--</select>-->
+<!--<br>-->
+<!--<br>-->
+<!--<label>-->
+<!--Purpose :-->
+<!--</label>-->
+<!--<select>-->
+<!--<option value="enquiry">Enquiry</option>-->
+<!--<option value="placeorder">Place Order</option>-->
+<!--<option value="return">Return</option>-->
+<!--</select>-->
+<!--<br>-->
+<!--<br>-->
+<!--<label>-->
+<!--Materials Provide:-->
+<!--</label><br>-->
+<!--<input type="checkbox" name="notebook"> Notebook <br>-->
+<!--<input type="checkbox" name="pen"> Pen <br>-->
+<!--<input type="checkbox" name="exampapers"> Exam Papers  <br>-->
+<!--<br>-->
+<!--<br>-->
+<!--<input type="submit" value="Submit">-->

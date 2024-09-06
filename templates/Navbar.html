@@ -1,0 +1,34 @@
+<div class="container-fluid p-0">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-3 py-lg-0 px-lg-5">
+            <a href="index.html" class="navbar-brand ml-lg-3">
+                <h1 class="m-0 text-uppercase text-primary"><i class="fa fa-book-reader mr-3"></i>SCHOOL STORE</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
+                <div class="navbar-nav mx-auto py-0">
+                    <a href="{% url 'SchoolStoreApp:index' %}" class="nav-item nav-link active">Home</a>
+                    <a href="{% url 'SchoolStoreApp:login' %}"  class="nav-item nav-link">Login</a>
+                    <a href="{% url 'SchoolStoreApp:register' %}" class="nav-item nav-link">Register</a>
+                    <div class="nav-item dropdown {% if 'SchoolStoreApp' in request.path %} active {% endif %}">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Department</a>
+<!--                        <div class="dropdown-menu m-0">-->
+                            <ul class="dropdown-menu">
+<!--                                <li><a class="dropdown-item" href="{% url 'SchoolStoreApp:AllDepartment' %}">All Departments</a></li>-->
+                                {% for dept in links %}
+                                <li><a class="dropdown-item" href="{{dept.get_url}}">{{dept.dep_name}}</a></li>
+                                {% endfor %}
+
+                            </ul>
+<!--                            <a href="detail.html" class="dropdown-item">Computer Science</a>-->
+
+                        </div>
+                    </div>
+<!--                    <a href="register.html" class="nav-item nav-link">Register</a>-->
+                </div>
+            <div>
+                <a href="{% url 'SchoolStoreApp:login' %}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>
+            </div>
+        </nav>
+    </div>

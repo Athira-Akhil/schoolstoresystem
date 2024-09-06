@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="container">
+    {% if department %}
+    <h2><mark>{{department.dep_name}}</mark></h2><br>
+
+     <h4>{{department.dep_description}}</h4>
+    {% endif %}
+</div>
+
+{% endblock %}

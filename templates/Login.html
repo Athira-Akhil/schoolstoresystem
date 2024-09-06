@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h2 style="text-align:center;">Login Form</h2>
+
+<form style="border: 3px solid #1f5fd5;" action="login" method="post">
+    {% csrf_token %}
+{% for msg in messages %}
+      <h6>{{msg}}</h6>
+    {% endfor %}
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input style="width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;" type="text" placeholder="Enter Username" name="uname" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input style="width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;" type="password" placeholder="Enter Password" name="psw" required>
+
+    <button style="background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;" type="submit">Login</button>
+
+  </div>
+    <div class="container" style="background-color:#f1f1f1">
+    <a href="{% url 'SchoolStoreApp:register' %}">Register here....</a>
+  </div>
+</form>
+
+{% endblock %}
